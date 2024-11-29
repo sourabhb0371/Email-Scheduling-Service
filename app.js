@@ -22,6 +22,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', (req, res) => {
   res.render('index', { title: 'Express SMTP Example' });
 });
+// app.get('/', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'public', 'index.html'));
+// });
 
 // Email sending route
 app.post('/send-email', async (req, res) => {
@@ -45,6 +48,7 @@ app.use((req, res, next) => {
 // Error handler for development (show stack trace)
 if (app.get('env') === 'development') {
   app.use((err, req, res, next) => {
+    console.error(err); // Log the full error
     res.status(err.status || 500);
     res.render('error', { message: err.message, error: err });
   });
