@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Error</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f8f9fa;
+    }
+    .error-container {
+      border: 1px solid #dc3545;
+      background-color: #f8d7da;
+      padding: 20px;
+      border-radius: 5px;
+      color: #721c24;
+    }
+    .error-container h1 {
+      font-size: 24px;
+      margin: 0;
+    }
+    .error-container p {
+      font-size: 18px;
+    }
+    .error-details {
+      background-color: #f1f3f5;
+      padding: 10px;
+      margin-top: 15px;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="error-container">
+    <h1>Error: <%= message %></h1>
+    <p>Status Code: <%= status %></p>
+
+    <% if (error.stack) { %>
+      <h3>Error Details:</h3>
+      <div class="error-details">
+        <pre><%= error.stack %></pre>
+      </div>
+    <% } %>
+  </div>
+
+</body>
+</html>
