@@ -2,7 +2,7 @@
 const express = require('express');
 const path = require('path');
 const logger = require('morgan');
-const { sendEmail } = require('./services/smtp');  // Import the SMTP module
+const { sendEmail } = require('./mail/smtp');  // Import the SMTP module
 
 const app = express();
 
