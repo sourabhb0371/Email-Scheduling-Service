@@ -6,7 +6,9 @@ var service=require('../service/serve')
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
-
+router.get('/home', function(req, res, next) {
+  res.render('homepage', { title: 'Express' });
+});
 router.post('/client',async (req,res)=>{
   var email=req.body.email;
   var username=req.body.username;

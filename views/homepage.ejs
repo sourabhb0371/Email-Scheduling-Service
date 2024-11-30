@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <link rel="stylesheet" href="stylesheets/homestyle.css">
+</head>
+<body>
+    <!-- Navbar Section -->
+  <nav class="navbar">
+    <div class="navbar-center">XMEN
+    </div>
+    <div class="navbar-user">
+      <p>Hello <%=User></p>
+    </div>
+  </nav>
+
+    <div class="container">
+        <section class="home-doc">
+            <h3>How to Schedule an Email?</h3>
+            <p><strong>Endpoint:</strong> <code>POST: /sendmail</code></p>
+            <p><strong>Request Body:</strong></p>
+            <pre class="request-body">
+                {
+                 "templateId": "uuid",
+
+                "userEmailsList": ["string1", "string2", ...] (required),
+
+                "scheduleAt": ["*", "*", "*", "*", "*", "*" ] (int array)
+                }
+            </pre>
+            <div class="cron-visual">
+                <div class="cron-item">* <span>Second</span></div>
+                <div class="cron-item">* <span>Minute</span></div>
+                <div class="cron-item">* <span>Hour</span></div>
+                <div class="cron-item">* <span>Day of Month</span></div>
+                <div class="cron-item">* <span>Month</span></div>
+                <div class="cron-item">* <span>Day of Week</span></div>
+              </div>
+              <div class="cron-details">
+                <p><strong>Second</strong>: (0 - 59, optional)</p>
+                <p><strong>Minute</strong>: (0 - 59)</p>
+                <p><strong>Hour</strong>: (0 - 23)</p>
+                <p><strong>Day of Month</strong>: (1 - 31)</p>
+                <p><strong>Month</strong>: (1 - 12)</p>
+                <p><strong>Day of Week</strong>: (0 - 7) (0 or 7 is Sunday)</p>
+              </div>
+          </section>
+
+        <section class="home-section">
+            <div class="home-container">
+                <h2>Email Template </h2>
+                <form action="home" method="POST">
+                  <div class="form-group">
+                    <label for="template-name">Email Template Name</label>
+                    <input type="text" id="template-name" name="template-name">
+                  </div>
+                  <div class="form-group">
+                    <label for="template-subject">Email Template Subject</label>
+                    <input type="text" id="template-subject" name="template-subject" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="template-body">Email Template Body</label>
+                    <textarea name="template-body" id="template-body"></textarea>
+                    <!-- <input type="password" id="password" name="password" required> -->
+                  </div>
+                  <button type="submit" class="btn">Submit</button>
+                  <!-- <a href="#">Already have an account? Login here</a> -->
+                </form>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

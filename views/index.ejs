@@ -9,34 +9,42 @@
     .hidden {
       display: none;
     }
+    .logo {
+      width: 80px;
+      height: auto;
+      margin-bottom: 10px;
+    }
   </style>
 </head>
 <body>
-    <div class="heading-container">
-        <h1>XMEN</h1>
-        <p>Email Scheduling Service</p>
+    <section class="ls-section">
+        <div class="heading-container">
+            <img src="images/xmen-logo.png" alt="X-Men Logo" class="logo">
+            <!-- <h1>XMEN</h1> -->
+            <p>Email Scheduling Service</p>
+          </div>
+      <div class="login-container">
+        <h2 id="form-title">Login</h2>
+        <form id="auth-form" action="/login" method="POST">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-group  hidden" id="username-group">
+            <label for="username">Username</label>
+            <input type="username" id="username" name="username" required>
+          </div>
+          <div class="form-group">
+            <label for="password" id="password-label">Password</label>
+            <input type="password" id="password" name="password" required>
+          </div>
+          
+          <button type="submit" class="btn" id="auth-button">Login</button>
+    
+          <a href="#" class="register-link" id="toggle-form">Don’t have an account? Register here</a>
+        </form>
       </div>
-  <div class="login-container">
-    <h2 id="form-title">Login</h2>
-    <form id="auth-form" action="/login" method="POST">
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required>
-      </div>
-      <div class="form-group  hidden" id="username-group">
-        <label for="username">Username</label>
-        <input type="username" id="username" name="username" required>
-      </div>
-      <div class="form-group">
-        <label for="password" id="password-label">Password</label>
-        <input type="password" id="password" name="password" required>
-      </div>
-      
-      <button type="submit" class="btn" id="auth-button">Login</button>
-
-      <a href="#" class="register-link" id="toggle-form">Don’t have an account? Register here</a>
-    </form>
-  </div>
+    </section>
 
   <script>
     const formTitle = document.getElementById('form-title');
