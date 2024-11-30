@@ -2,6 +2,8 @@ const con=require('../DBconfig/db')
 const email=require('../mail/email')
 const { v4: uuidv4 } = require('uuid');
 const bcrypt = require('bcrypt');
+const schedule = require('node-schedule');
+const { use } = require('../routes');
 
 // Function to hash a password
 async function hashPassword(plainPassword) {
@@ -31,4 +33,67 @@ async function  RegisterClient(email, username, password){
     return result
 }
 
-module.exports={RegisterClient}
+async function LoginClient(email,password){
+  var result=await con.executeQuery('Select id, email, password from clients where email= ?',[email])
+  if (! result.success){
+    console.log(result)
+    return result
+  }
+  var clientData=result.data[0]
+  console.log(clientData)
+  if (await verifyPassword(password,clientData.password)){
+    return {success:true, data:clientData.id}
+  }else{
+    return {success:false,error:"invalid credentials"}
+  }
+}
+
+async function RegisterTemplate(templateName,templateSub,templateBody,clientId){
+  var templateId=generateNewUuid()
+  const result=await con.executeQuery('INSERT INTO template (id, clientId,templateName,templateSubject,templateBody) VALUES (?, ?, ?, ?, ?)',[templateId,clientId,templateName,templateSub,templateBody])
+  console.log(result.error)
+  return result
+}
+async function GetTemplates(clientId){
+  const result=await con.executeQuery('Select * from template where clientId= ?',[clientId])
+  console.log(result.error)
+  return result
+}
+async function SendMail(isSchduled,templateId,userEmailsList,scheduledAt){
+  result=await con.executeQuery('select templateSubject,templateBody from template where id= ?',[templateId])
+  if(!result.success){
+    return result
+  }
+  const maildetails={subject:result.data[0].templateSubject,body:result.data[0].templateBody}
+  if(isSchduled =='false' ){
+    return await sendmail(userEmailsList,maildetails)
+  }else{
+    return sendScheduledmail(userEmailsList,maildetails,scheduledAt)
+  }
+}
+
+async function sendmail(userEmailsList,maildetails){
+  for(const user of userEmailsList){
+    console.log(user)
+    await email.sendEmail(user,maildetails.subject,maildetails.body)
+  }
+  return {success:true}
+}
+
+function sendScheduledmail(userEmailsList,maildetails,scheduledAt){
+  console.log(2,userEmailsList,maildetails,scheduledAt)
+  if(scheduledAt.length !=5){
+    return({success:false, Message:"invalid scheduling"})
+  }
+  var minute=scheduledAt[0]
+    var hour=scheduledAt[1]
+    var day=scheduledAt[2]
+    var month=scheduledAt[3]
+    var weekday=scheduledAt[4]
+    schedule.scheduleJob(`${minute} ${hour} ${day} ${month} ${weekday}`,()=>{
+      sendmail(userEmailsList,maildetails)
+    })
+  return {success:true}
+}
+
+module.exports={RegisterClient,LoginClient,RegisterTemplate,GetTemplates,SendMail}
