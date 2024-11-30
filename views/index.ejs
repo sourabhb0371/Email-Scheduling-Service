@@ -12,6 +12,10 @@
   </style>
 </head>
 <body>
+    <div class="heading-container">
+        <h1>XMEN</h1>
+        <p>Email Scheduling Service</p>
+      </div>
   <div class="login-container">
     <h2 id="form-title">Login</h2>
     <form id="auth-form" action="/login" method="POST">
@@ -19,15 +23,17 @@
         <label for="email">Email</label>
         <input type="email" id="email" name="email" required>
       </div>
+      <div class="form-group  hidden" id="username-group">
+        <label for="username">Username</label>
+        <input type="username" id="username" name="username" required>
+      </div>
       <div class="form-group">
         <label for="password" id="password-label">Password</label>
         <input type="password" id="password" name="password" required>
       </div>
-      <div class="form-group hidden" id="confirm-password-group">
-        <label for="confirm-password">Confirm Password</label>
-        <input type="password" id="confirm-password" name="confirmPassword">
-      </div>
+      
       <button type="submit" class="btn" id="auth-button">Login</button>
+
       <a href="#" class="register-link" id="toggle-form">Don’t have an account? Register here</a>
     </form>
   </div>
@@ -37,7 +43,7 @@
     const authForm = document.getElementById('auth-form');
     const authButton = document.getElementById('auth-button');
     const toggleFormLink = document.getElementById('toggle-form');
-    const confirmPasswordGroup = document.getElementById('confirm-password-group');
+    const username = document.getElementById('username-group');
 
     let isLogin = true; // Tracks current form state
 
@@ -51,16 +57,58 @@
         authForm.action = '/login';
         authButton.textContent = 'Login';
         toggleFormLink.textContent = "Don’t have an account? Register here";
-        confirmPasswordGroup.classList.add('hidden');
+        username.classList.add('hidden');
       } else {
         // Switch to Register
         formTitle.textContent = 'Register';
         authForm.action = '/register';
         authButton.textContent = 'Register';
         toggleFormLink.textContent = 'Already have an account? Login here';
-        confirmPasswordGroup.classList.remove('hidden');
+        username.classList.remove('hidden');
       }
     });
+
+    //handle login success
+    document.getElementById('authform').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent form from submitting the traditional way
+
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    
+    // Check if values are valid
+    if (!email || !password) {
+      document.getElementById('message').innerText = 'Please fill in all fields.';
+      return;
+    }
+    const formData = {
+      email,
+      password
+    };
+
+    fetch('http://localhost:3000/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    })
+      .then(response => {
+        if (!response.ok) {
+          return Promise.reject('Failed to Login');
+        }
+        return response.json(); // Parse the JSON response
+      })
+      .then(data => {
+        // Handle the success
+        document.getElementById('message').innerText = 'Login successful!';
+        console.log('Success:', data);
+      })
+      .catch(error => {
+        // Handle errors
+        document.getElementById('message').innerText = 'Error: ' + error;
+        console.error('Error:', error);
+      });
+  });
   </script>
 </body>
 </html>
