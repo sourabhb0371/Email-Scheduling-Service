@@ -1,14 +1,72 @@
-body {
+* {
+  padding: 0;
   margin: 0;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  box-sizing: border-box;
 }
-
-a {
-  color: #00B7FF;
+body {
+  color:#171a20;
+  font-family: 'M PLUS 1', sans-serif;
 }
-h1 {
+.desktop {
+  display: none;
+}
+@media (min-width:768px) {
+  .desktop {
+      display: initial;
+  }     
+}
+header {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  padding:5px 20px;
+  position: fixed;
+  top:0;
+  z-index:2;
+  width:100%;
+}
+a.logo {
+  height: 12px;
+  width: 100px;
+  color:inherit;
+}
+header a {
+  color:inherit;
+}
+header nav a{
+  text-decoration: none;
+  padding: 5px 10px;
+}
+header nav.center {
   text-align: center;
 }
+header nav.right {
+  text-align: right;
+}
 
+section {
+  height: 100vh;
+  background-size: cover;
+  background-position: center center;
+}
+section .content {
+  width: 100%;
+  height: 100vh;
+  padding-top: 15vh;
+  padding-bottom: 15vh;
+  text-align: center;
+  display: grid;
+  grid-template-rows: min-content auto min-content;
+}
+section h1 {
+  font-size: 3rem;
+}
+section a {
+  color:inherit;
+}
+section .buttons a {
+  display: block;
+  background-color: #eee;
+  color:inherit;
+}
 
 
