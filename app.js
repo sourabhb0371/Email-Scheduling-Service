@@ -1,63 +1,42 @@
-// app.js
-const express = require('express');
-const path = require('path');
-const logger = require('morgan');
-const { sendEmail } = require('./mail/scheduler');  // Import the SMTP module
+var createError = require('http-errors');
+var express = require('express');
+var path = require('path');
+var cookieParser = require('cookie-parser');
+var logger = require('morgan');
 
-const app = express();
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
 
-// Set up view engine (EJS)
+var app = express();
+
+// Set view engine
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-// Middleware setup
-app.use(logger('dev'));   // Log requests
-app.use(express.json());  // Parse JSON bodies
-app.use(express.urlencoded({ extended: false }));  // Parse URL-encoded bodies
-
-// Serve static files
+// Use middleware
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Routes setup
-app.get('/', (req, res) => {
-  res.render('index', { title: 'Express SMTP Example' });
+// Define routes
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+
+// Error handling
+app.use(function(req, res, next) {
+  next(createError(404));
 });
 
-// Email sending route
-app.post('/send-email', async (req, res) => {
-  const { to, subject, text, html } = req.body;
+app.use(function(err, req, res, next) {
+  // Set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  try {
-    const emailInfo = await sendEmail(to, subject, text, html);
-    res.status(200).json({ message: 'Email sent successfully', info: emailInfo });
-  } catch (error) {
-    res.status(500).json({ message: 'Failed to send email', error: error.message });
-  }
-});
-
-// Error handler
-app.use((req, res, next) => {
-  const err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
-
-// Error handler for development (show stack trace)
-if (app.get('env') === 'development') {
-  app.use((err, req, res, next) => {
-    res.status(err.status || 500);
-    res.render('error', { message: err.message, error: err });
-  });
-}
-
-// Error handler for production (no stack trace)
-app.use((err, req, res, next) => {
+  // Render the error page
   res.status(err.status || 500);
-  res.render('error', { message: err.message, error: {} });
+  res.render('error');
 });
 
-// Start the server
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
-});
+module.exports = app;
