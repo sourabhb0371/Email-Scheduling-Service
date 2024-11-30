@@ -1,72 +1,84 @@
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
+/* General Styles */
 body {
-  color:#171a20;
-  font-family: 'M PLUS 1', sans-serif;
-}
-.desktop {
-  display: none;
-}
-@media (min-width:768px) {
-  .desktop {
-      display: initial;
-  }     
-}
-header {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  padding:5px 20px;
-  position: fixed;
-  top:0;
-  z-index:2;
-  width:100%;
-}
-a.logo {
-  height: 12px;
-  width: 100px;
-  color:inherit;
-}
-header a {
-  color:inherit;
-}
-header nav a{
-  text-decoration: none;
-  padding: 5px 10px;
-}
-header nav.center {
-  text-align: center;
-}
-header nav.right {
-  text-align: right;
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
 }
 
-section {
-  height: 100vh;
-  background-size: cover;
-  background-position: center center;
+.login-container {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 300px;
 }
-section .content {
-  width: 100%;
-  height: 100vh;
-  padding-top: 15vh;
-  padding-bottom: 15vh;
+
+h2 {
   text-align: center;
-  display: grid;
-  grid-template-rows: min-content auto min-content;
+  margin-bottom: 20px;
+  color: #333333;
 }
-section h1 {
-  font-size: 3rem;
+
+.form-group {
+  margin-bottom: 15px;
 }
-section a {
-  color:inherit;
-}
-section .buttons a {
+
+.form-group label {
   display: block;
-  background-color: #eee;
-  color:inherit;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #555555;
 }
 
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
 
+.btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn:hover {
+  background-color: #45a049;
+}
+
+.register-link {
+  display: block;
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+  color: #0066cc;
+  text-decoration: none;
+}
+
+.register-link:hover {
+  text-decoration: underline;
+}
+
+.forgot-password {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 12px;
+  color: #777777;
+  text-decoration: none;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+}

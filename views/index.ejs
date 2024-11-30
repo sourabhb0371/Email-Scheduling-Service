@@ -1,23 +1,68 @@
-<!-- /public/index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="stylesheets/style.css">
-    <link
-      href="https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@400;500&family=Poppins:wght@100;300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
     <title>Email Scheduling Service</title>
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <a class="" href="#">Email Scheduling Service</a>
-    </header>
-    <nav class="center desktop">
-        <a href="#">Login</a>
-        <a href="#">Register</a>
-    </nav>
+  <div class="login-container">
+    <h2 id="form-title">Login</h2>
+    <form id="auth-form" action="/login" method="POST">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="password" id="password-label">Password</label>
+        <input type="password" id="password" name="password" required>
+      </div>
+      <div class="form-group hidden" id="confirm-password-group">
+        <label for="confirm-password">Confirm Password</label>
+        <input type="password" id="confirm-password" name="confirmPassword">
+      </div>
+      <button type="submit" class="btn" id="auth-button">Login</button>
+      <a href="#" class="register-link" id="toggle-form">Don’t have an account? Register here</a>
+    </form>
+  </div>
+
+  <script>
+    const formTitle = document.getElementById('form-title');
+    const authForm = document.getElementById('auth-form');
+    const authButton = document.getElementById('auth-button');
+    const toggleFormLink = document.getElementById('toggle-form');
+    const confirmPasswordGroup = document.getElementById('confirm-password-group');
+
+    let isLogin = true; // Tracks current form state
+
+    toggleFormLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      isLogin = !isLogin;
+
+      if (isLogin) {
+        // Switch to Login
+        formTitle.textContent = 'Login';
+        authForm.action = '/login';
+        authButton.textContent = 'Login';
+        toggleFormLink.textContent = "Don’t have an account? Register here";
+        confirmPasswordGroup.classList.add('hidden');
+      } else {
+        // Switch to Register
+        formTitle.textContent = 'Register';
+        authForm.action = '/register';
+        authButton.textContent = 'Register';
+        toggleFormLink.textContent = 'Already have an account? Login here';
+        confirmPasswordGroup.classList.remove('hidden');
+      }
+    });
+  </script>
 </body>
 </html>
+
+
