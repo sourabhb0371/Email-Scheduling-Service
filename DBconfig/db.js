@@ -15,10 +15,10 @@ const pool = mysql.createPool({
 async function executeQuery(query, params = []) {
   try {
     const [rows, fields] = await pool.execute(query, params);
-    return rows; // Return query results
+    return { success: true, data: rows };
   } catch (err) {
     console.error('Database query error:', err);
-    throw err; // Re-throw error so it can be handled higher up
+    return { success: false, error: err.message || 'An error occurred while querying the database' };
   }
 }
 

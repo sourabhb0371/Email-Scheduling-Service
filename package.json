@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "ejs": "^3.1.10",
@@ -16,6 +17,7 @@
     "mysql2": "^3.11.5",
     "node-schedule": "^2.1.1",
     "nodemailer": "^6.9.16",
-    "test-app": "file:"
+    "test-app": "file:",
+    "uuid": "^11.0.3"
   }
 }
