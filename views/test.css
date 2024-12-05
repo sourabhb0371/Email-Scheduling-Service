@@ -22,7 +22,7 @@ body {
     color: white;
     padding: 10px;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     z-index: 1000;
 }
@@ -31,12 +31,18 @@ body {
     font-size: 18px;
     font-weight: bold;
 }
+.navbar .navbar-center {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    padding-left: 20px;
+}
 
 /* Container for form and documentation */
 .container {
     display: flex;
     justify-content: flex-start;
-    padding: 80px 20px; /* Added padding to avoid navbar overlap */
+    padding: 80px 0px; /* Added padding to avoid navbar overlap */
     gap: 40px;
     flex-wrap: wrap;
     height: auto;
@@ -50,6 +56,7 @@ body {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     max-width: 900px;
     width: 100%;
+    margin-left: 40px;
 }
 
 .home-doc h3 {
@@ -81,11 +88,11 @@ body {
 /* Email form container */
 .home-container {
     background-color: #ffffff;
-    padding: 40px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 500px;
+    padding: 80px 50px;
 }
 
 .home-container h2 {
@@ -163,4 +170,47 @@ a:hover {
     .home-doc {
         margin-bottom: 20px;
     }
+}
+
+/* Modal Style */
+.modal {
+    display: none;  /* Hidden by default */
+    position: fixed;  /* Stay in place */
+    z-index: 1;  /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);  /* Semi-transparent background */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+}
+
+/* Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+/* Close Button Hover Effect */
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Success Message Style */
+h2 {
+    color: green;  /* Green for success */
 }

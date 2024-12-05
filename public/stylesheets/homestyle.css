@@ -37,12 +37,40 @@ body {
     color: #fff;
     padding-left: 20px;
 }
+/* .token {
+    
+    margin-left:  40px;
+    border-width: 2px;
+    border-color: green;
+    border-style: solid;
+    max-width: 100px;
+    width: 50%;
+} */
+ .token {
+    background-color: #fff;       /* Light background for the token container */
+    color: #333;                      /* Dark text color */
+    font-family: 'Courier New', Courier, monospace;  /* Use monospace font for a code-like appearance */
+    font-size: 16px;                  /* Set font size */
+    padding: 20px;                    /* Add some padding inside the container */
+    border-radius: 8px;               /* Round the corners */
+    max-width: 80%;                   /* Limit the width to 80% of the page */
+    margin: 20px auto;                /* Center the content and give some vertical spacing */
+    word-wrap: break-word;            /* Ensure long tokens wrap and don't overflow */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  /* Add subtle shadow for depth */
+    text-align: center;   
+}
+.token span {
+    color: #007BFF;  /* Use blue color for the token text */
+    word-wrap: break-word;  /* Ensure the token wraps if it is too long */
+    display: block; /* Display the token as a block element (to avoid inline issues) */
+    overflow-wrap: break-word;
+}
 
 /* Container for form and documentation */
 .container {
     display: flex;
     justify-content: flex-start;
-    padding: 80px 20px; /* Added padding to avoid navbar overlap */
+    padding: 50px 0px; /* Added padding to avoid navbar overlap */
     gap: 40px;
     flex-wrap: wrap;
     height: auto;
@@ -92,7 +120,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 500px;
-    padding: 80px 100px;
+    padding: 80px 50px;
 }
 
 .home-container h2 {

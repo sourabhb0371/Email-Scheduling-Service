@@ -52,7 +52,10 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/register',function(req,res,next){
-  res.render('register', { title: 'Express' });
+  res.render('register');
+});
+router.get('/home',verifyJWT,function(req,res,next){
+  res.render('homepage');
 });
 
 router.post('/client',async (req,res)=>{
@@ -83,9 +86,9 @@ router.post('/client',async (req,res)=>{
         maxAge: 3600000,  // Set cookie expiration time (1 hour)
         sameSite: 'Strict' // Helps to prevent CSRF attacks
       });
-    res.status(200).json( { success: true, data:result.data })
+    res.status(201).redirect('/home');
   }else{
-    res.status(401).json(result.error)
+    res.status(401).json(result.error);
   }
  });
 
@@ -125,7 +128,7 @@ router.get('/template',verifyJWT,async(req,res)=>{
   var clientId=req.user.id
   result=await service.GetTemplates(clientId)
   if (result.success){
-    res.status(200).json({Success:true,Templates:result.data})
+    res.status(200)
   }else{
     res.status(500).json({Success:false,Message:"Issue in fetching data"})
   }
@@ -150,7 +153,7 @@ router.post('/sendmail',verifyJWTByAuth,async(req,res)=>{
   if(result.success){
     res.status(200).json({Success:true,Message:"Mail send successfully"})
   }else{
-    res.status(500).json({Success:false,Message:"Issue ehile sending mail"})
+    res.status(500).json({Success:false,Message:"Issue while sending mail"})
   }
 })
 

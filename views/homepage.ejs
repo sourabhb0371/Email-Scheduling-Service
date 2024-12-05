@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Register</title>
+  <title>Xmen</title>
   <link rel="stylesheet" href="stylesheets/homestyle.css">
 </head>
 <body>
@@ -12,10 +12,9 @@
     <div class="navbar-center">XMEN
     </div>
     <div class="navbar-user">
-      <p>Hello <%=User></p>
+      <p>Hello User</p>
     </div>
   </nav>
-
     <div class="container">
         <section class="home-doc">
             <h3>How to Schedule an Email?</h3>
@@ -51,18 +50,18 @@
         <section class="home-section">
             <div class="home-container">
                 <h2>Email Template </h2>
-                <form action="home" method="POST">
+                <form action="/template" method="POST">
                   <div class="form-group">
                     <label for="template-name">Email Template Name</label>
-                    <input type="text" id="template-name" name="template-name">
+                    <input type="text" id="template-name" name="templateName" required>
                   </div>
                   <div class="form-group">
                     <label for="template-subject">Email Template Subject</label>
-                    <input type="text" id="template-subject" name="template-subject" required>
+                    <input type="text" id="template-subject" name="templateSub" required>
                   </div>
                   <div class="form-group">
                     <label for="template-body">Email Template Body</label>
-                    <textarea name="template-body" id="template-body"></textarea>
+                    <textarea name="templateBody" id="template-body"></textarea>
                     <!-- <input type="password" id="password" name="password" required> -->
                   </div>
                   <button type="submit" class="btn">Submit</button>
@@ -70,6 +69,31 @@
                 </form>
             </div>
         </section>
+        <section class="token">
+          <h4>Token: </h4>
+          <span id="token-container"></span>
+        </section>
     </div>
+  <script>
+    window.onload = function() {
+      fetch('/token')  // Make a GET request to the /token endpoint
+          .then(response => {
+              if (!response.ok) {
+                  throw new Error('Failed to fetch the token');
+              }
+              return response.text();  // Assuming the response is JSON containing the token
+          })
+          .then(data => {
+              // Display the token in the 'token-container' div
+              document.getElementById('token-container').textContent = data;
+          })
+
+  };
+  window.onsubmit = function() {
+    fetch('/template')
+      .then
+  }
+
+</script>
 </body>
 </html>
