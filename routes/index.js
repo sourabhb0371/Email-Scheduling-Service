@@ -80,7 +80,7 @@ router.post('/client',async (req,res)=>{
       expiresIn: '1d'  // Optional: Set expiration time for the token
     });
        // Set JWT in HttpOnly, Secure cookie
-       res.cookie('token', token, {
+        res.cookie('token', token, {
         httpOnly: true,   // Prevent access to the cookie from JavaScript
         secure: process.env.NODE_ENV === 'production', // Only send cookie over HTTPS in production
         maxAge: 3600000,  // Set cookie expiration time (1 hour)
@@ -96,10 +96,11 @@ router.post('/client',async (req,res)=>{
 router.post('/logout', (req, res) => {
   // Clear the JWT cookie
   res.clearCookie('token');
-  res.json({
-    success: true,
-    message: 'You have been logged out.',
-  });
+  // res.json({
+  //   success: true,
+  //   message: 'You have been logged out.',
+  // });
+  res.redirect('/')
 });
 
 // Protected route (requires JWT from cookie)

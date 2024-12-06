@@ -12,7 +12,9 @@
     <div class="navbar-center">XMEN
     </div>
     <div class="navbar-user">
-      <p>Hello User</p>
+        <form action="/logout" method="POST">
+        <button type="submit" class="logout-btn">Logout</button>
+      </form>
     </div>
   </nav>
     <div class="container">
@@ -74,7 +76,14 @@
           <span id="token-container"></span>
         </section>
     </div>
-  <script>
+    <!-- <div id="success-popup" class="popup hidden">
+      <div class="popup-content">
+        <h3>Success!</h3>
+        <p id="popup-message">Your form has been submitted successfully.</p>
+        <button class="close-popup-btn">Close</button>
+      </div>
+    </div> -->
+    <script>
     window.onload = function() {
       fetch('/token')  // Make a GET request to the /token endpoint
           .then(response => {
@@ -93,7 +102,7 @@
     fetch('/template')
       .then
   }
-
 </script>
 </body>
 </html>
+
